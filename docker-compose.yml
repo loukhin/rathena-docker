@@ -1,0 +1,16 @@
+version: "3.6"
+services:
+  server:
+    container_name: "rathena"
+    build: .
+    ports:
+      - 6900:6900
+      - 6121:6121
+      - 5121:5121
+    volumes:
+      - ./rathena/:/opt/rathena/
+      - ./conf/:/opt/rathena/custom-conf
+    init: true # helps with signal forwarding and process reaping
+    tty: true
+    stdin_open: true
+
