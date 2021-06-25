@@ -1,7 +1,8 @@
-FROM alpine:3.12.3 as build
+FROM alpine:3.12.3
 
 ENV PACKETVER=20200304
 
+RUN addgroup -S rathena && adduser -S rathena -G rathena
 RUN apk update \
     && apk add --no-cache coreutils util-linux git make gcc g++ mariadb-dev mariadb-connector-c-dev zlib-dev pcre-dev pcre libstdc++ dos2unix mariadb-client bind-tools linux-headers
 
@@ -11,12 +12,6 @@ RUN git clone https://github.com/rathena/rathena.git /opt/rathena \
     && make clean \
     && make server \
     && chmod a+x login-server char-server map-server
-
-
-FROM alpine:3.12.3
-
-RUN addgroup -S rathena && adduser -S rathena -G rathena
-COPY --chown=rathena:rathena --from=build /opt/rathena /opt/rathena
 
 WORKDIR /opt/rathena
 VOLUME /opt/rathena
