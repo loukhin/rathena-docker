@@ -9,7 +9,7 @@ _main() {
     done
     cp -r /opt/rathena/custom-conf/* /opt/rathena/conf
 
-    exec "$@"
+    exec setpriv --reuid=rathena --regid=rathena --init-groups --inh-caps=-all "$@"
 }
 
 _main "$@"
