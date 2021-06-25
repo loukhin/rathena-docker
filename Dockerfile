@@ -18,5 +18,3 @@ VOLUME /opt/rathena
 
 COPY ./docker-entrypoint.sh /bin/
 ENTRYPOINT [ "docker-entrypoint.sh" ]
-
-EXPOSE 6900/tcp 6121/tcp 5121/tcp
