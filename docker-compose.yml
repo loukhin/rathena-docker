@@ -1,16 +1,40 @@
 version: "3.6"
 services:
-  server:
-    container_name: "rathena"
+  login:
+    container_name: "rA_login"
+    image: rathena
     build: .
     ports:
       - 6900:6900
-      - 6121:6121
-      - 5121:5121
     volumes:
-      - ./rathena/:/opt/rathena/
       - ./conf/:/opt/rathena/custom-conf
+    command: /opt/rathena/login-server
     init: true # helps with signal forwarding and process reaping
     tty: true
     stdin_open: true
-
+  char:
+    container_name: "rA_char"
+    image: rathena
+    ports:
+      - 6121:6121
+    volumes:
+      - ./conf/:/opt/rathena/custom-conf
+    command: /opt/rathena/char-server
+    init: true # helps with signal forwarding and process reaping
+    tty: true
+    stdin_open: true
+    depends_on:
+      - login
+  map:
+    container_name: "rA_map"
+    image: rathena
+    ports:
+      - 5121:5121
+    volumes:
+      - ./conf/:/opt/rathena/custom-conf
+    command: /opt/rathena/map-server
+    init: true # helps with signal forwarding and process reaping
+    tty: true
+    stdin_open: true
+    depends_on:
+      - char
