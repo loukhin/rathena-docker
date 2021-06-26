@@ -8,7 +8,7 @@ RUN apk update \
 
 RUN git clone https://github.com/rathena/rathena.git /opt/rathena \
     && cd /opt/rathena \
-    && ./configure --enable-packetver=${PACKETVER} --with-mysql=/usr/bin/mariadb_config \
+    && ./configure --enable_vip=yes --enable-packetver=${PACKETVER} --with-mysql=/usr/bin/mariadb_config \
     && make clean \
     && make server \
     && chmod a+x login-server char-server map-server
