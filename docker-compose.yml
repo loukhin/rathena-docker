@@ -32,6 +32,7 @@ services:
       - 5121:5121
     volumes:
       - ./conf/:/opt/rathena/custom-conf
+      - ./mapcache/map_cache.dat:/opt/rathena/db/import/map_cache.dat
     command: /opt/rathena/map-server
     init: true # helps with signal forwarding and process reaping
     tty: true
