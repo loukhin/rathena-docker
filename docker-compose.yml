@@ -8,7 +8,7 @@ services:
       - 6900:6900
     volumes:
       - ./conf/:/opt/rathena/custom-conf
-    command: /opt/rathena/login-server
+    command: login
     init: true # helps with signal forwarding and process reaping
     tty: true
     stdin_open: true
@@ -19,7 +19,7 @@ services:
       - 6121:6121
     volumes:
       - ./conf/:/opt/rathena/custom-conf
-    command: /opt/rathena/char-server
+    command: char
     init: true # helps with signal forwarding and process reaping
     tty: true
     stdin_open: true
@@ -34,7 +34,7 @@ services:
       - ./conf/:/opt/rathena/custom-conf
       - ./npc/:/opt/rathena/custom-npc
       - ./mapcache/map_cache.dat:/opt/rathena/db/import/map_cache.dat
-    command: /opt/rathena/map-server
+    command: map
     init: true # helps with signal forwarding and process reaping
     tty: true
     stdin_open: true
